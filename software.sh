@@ -14,8 +14,37 @@ wget -O slack.deb https://downloads.slack-edge.com/linux_releases/slack-desktop-
 wget -O vscode.deb https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable
 sudo dpkg -i -R *.deb
 
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
 sudo apt-get update
+
 sudo apt-get install spotify-client
 sudo apt-get install papirus-icon-theme
 sudo apt install gimp
 sudo apt install chromium-browser
+sudo apt install openjdk-11-jdk
+sudo apt-get install docker-ce
+
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+
+cd ~
+echo 'export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> .bashrc
+
+command -v nvm
+nvm install-latest-npm
+nvm install node
+
+sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
